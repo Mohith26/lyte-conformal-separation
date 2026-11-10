@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conformal Separation · Safety · Lyte Galaxy (concept)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><img src="lyte-mark.png" alt=""><span class="word">lyte</span><span class="div"></span><span class="prod">Galaxy</span></div>
+  <nav class="nav"><a><i data-lucide="cpu"></i>Devices</a><a><i data-lucide="radar"></i>Live view</a><a><i data-lucide="film"></i>Recordings</a><a class="on"><i data-lucide="shield-check"></i>Safety</a><a><i data-lucide="box"></i>Twins</a></nav>
+  <div class="right">
+    <span class="site"><i data-lucide="warehouse"></i>Dock 23 · Outbound</span>
+    <span class="status"><span class="led"></span>LyteVision · 3 online</span>
+    <span class="avatar">MG</span>
+  </div>
+</header>
+
+<div class="page">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Safety · Speed &amp; separation monitoring</div>
+      <h1>Conformal separation <span class="beta">Preview</span></h1>
+      <p class="sub">Replace the 1.6 m/s worst-case approach speed with a calibrated bound from LyteVision's measured motion. Replayed on held-out dock recordings.</p>
+    </div>
+    <div class="controls">
+      <label class="seg-l">Target under-protection</label>
+      <div class="seg" id="alpha"></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="panel scene-panel">
+      <div class="panel-h">
+        <div><span class="tag">Replay</span><span class="ph">Dock 23 · trailer loading · held-out recording 5000</span></div>
+        <div class="legend"><span><i class="lg zone"></i>Conformal zone</span><span><i class="lg static"></i>1.6 m/s zone</span><span><i class="lg dop-a"></i>Approaching</span><span><i class="lg dop-r"></i>Receding</span></div>
+      </div>
+      <div class="canvas-wrap"><canvas id="scene"></canvas>
+        <div class="hud" id="hud"></div>
+      </div>
+      <div class="timeline">
+        <button id="play" class="play" aria-label="Play"><i data-lucide="pause"></i></button>
+        <div class="lanes" id="lanes"></div>
+        <div class="clock" id="clock"></div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <div class="panel-h"><span class="ph strong">Held-out replay</span><span class="muted" id="hours"></span></div>
+        <div class="kpis" id="kpis"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-h"><span class="ph strong">Policies</span><span class="muted">same recordings, same robot</span></div>
+        <table class="tbl"><thead><tr><th>Human speed term</th><th class="n">Downtime</th><th class="n">Stops / h</th><th class="n">Under-protected</th></tr></thead><tbody id="policies"></tbody></table>
+      </section>
+      <section class="panel">
+        <div class="panel-h"><span class="ph strong">Calibrated margins</span><span class="muted" id="calN"></span></div>
+        <div id="margins" class="margins"></div>
+        <p class="fine">Margin = finite-sample conformal quantile of (closing speed over the next T<sub>r</sub>+T<sub>s</sub> = 0.6 s) minus the tracked approach speed, per speed state. Calibrated on 30 recordings (<span id="calFrames"></span> frames), evaluated on 30 others.</p>
+      </section>
+    </aside>
+  </div>
+  <footer class="foot">Unofficial concept demo by Mohith Gajjela. Not affiliated with Lyte. Synthetic data. Not a certified safety function.</footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
